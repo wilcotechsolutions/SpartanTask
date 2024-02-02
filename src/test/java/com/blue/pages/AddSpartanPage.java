@@ -4,20 +4,21 @@ import com.blue.utilities.BrowserUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
-public class SpartanEditPage extends BasePage {
+public class AddSpartanPage extends BasePage {
 
     @FindBy(id="name")
     public WebElement nameInputBox;
 
-    @FindBy(id="gender")
+    @FindBy(id="genderSelect")
     public WebElement genderDropdown;
 
     @FindBy(id="phone")
     public WebElement phoneInputBox;
 
     @FindBy(xpath="//input[@type='submit']")
-    public WebElement updateButton;
+    public WebElement submitButton;
 
     @FindBy(xpath="//a[contains(text(),'Cancal')]")
     public WebElement cancelButton;
@@ -30,7 +31,7 @@ public class SpartanEditPage extends BasePage {
 
     public void clickOnTheButton(String buttonName) {
         WebElement button = switch (buttonName) {
-            case "Update" -> updateButton;
+            case "Submit" -> submitButton;
             case "Cancel" -> cancelButton;
             case "Back to the List" -> backToTheListButton;
             default -> null;
@@ -45,6 +46,14 @@ public class SpartanEditPage extends BasePage {
             default -> null;
         };
         BrowserUtils.enterData(inputBox, data);
+    }
+
+    public void selectFromDropdown(String option, String dropdownName) {
+        if(dropdownName.equals("Gender")){
+            wait.until(ExpectedConditions.visibilityOf(genderDropdown));
+            Select select = new Select(genderDropdown);
+            select.selectByVisibleText(option);
+        }
     }
 
     public String getActualData(String fieldName) {
