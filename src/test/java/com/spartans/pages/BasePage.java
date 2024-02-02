@@ -1,7 +1,7 @@
-package com.blue.pages;
+package com.spartans.pages;
 
 import org.openqa.selenium.support.PageFactory;
-import com.blue.utilities.Driver;
+import com.spartans.utilities.Driver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;

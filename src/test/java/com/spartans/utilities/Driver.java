@@ -1,4 +1,4 @@
-package com.blue.utilities;
+package com.spartans.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Platform;

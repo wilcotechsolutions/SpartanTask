@@ -1,4 +1,4 @@
-package com.blue.runners;
+package com.spartans.runners;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
                 "pretty",
         },
         features = "@target/rerun.txt",
-        glue = "com/blue/step_definitions"
+        glue = "com/spartans/step_definitions"
 )
 
 public class FailedTestRunner {

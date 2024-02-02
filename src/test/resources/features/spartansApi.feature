@@ -1,3 +1,5 @@
+Feature: Check API Results
+
 Scenario Outline:
 Then Assert API results with the info of Spartan's <id> ,  "<name>" , "<gender>" and "<phone>"
 Examples:

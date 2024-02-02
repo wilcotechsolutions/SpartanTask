@@ -1,5 +1,5 @@
-package com.blue.step_definitions;
-import com.blue.pages.SpartanPOJO;
+package com.spartans.step_definitions;
+import com.spartans.pages.SpartanPOJO;
 import com.google.gson.Gson;
 import io.cucumber.java.en.*;
 import org.hamcrest.Matchers;

@@ -1,13 +1,12 @@
-package com.blue.pages;
+package com.spartans.pages;
 
-import com.blue.utilities.BrowserUtils;
+import com.spartans.utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.blue.utilities.Driver;
+import com.spartans.utilities.Driver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SpartanCrudOperationPage extends BasePage{
