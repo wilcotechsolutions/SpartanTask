@@ -27,7 +27,7 @@ Feature: Manage Spartans Army
     Then Verify that "Total Result" is equal to "Total"
     Examples:
       | NAME  |
-      | Tariq |
+      | Tariqssss |
 
   @View
   Scenario Outline: Verify View Functionality
