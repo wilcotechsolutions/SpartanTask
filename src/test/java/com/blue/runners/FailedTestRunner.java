@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin ={
-                "html:target/failed-cucumber-reports.html",
+                "html:target/cucumber-reports/failed-cucumber.html",
                 "json:target/cucumber-reports/failed-cucumber.json",
                 "junit:target/cucumber-reports/failed-cucumber.xml",
                 "pretty",

@@ -1,16 +1,15 @@
 package com.blue.pages;
 
 import com.blue.utilities.BrowserUtils;
+import com.blue.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.blue.utilities.Driver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SpartanCrudOperationPage extends BasePage{
+public class SpartanCrudOperationPage extends BasePage {
 
     @FindBy(id = "search")
     public WebElement searchButton;
@@ -36,6 +35,12 @@ public class SpartanCrudOperationPage extends BasePage{
     @FindBy(xpath = "//tbody/tr/td[3]")
     public List<WebElement> phoneDataOnTheColumn;
 
+    @FindBy(xpath = "//tbody/tr/td[4]")
+    public List<WebElement> genderDataOnTheColumn;
+
+    @FindBy(xpath = "//tbody/tr/td[1]")
+    public List<WebElement> idDataOnTheColumn;
+
     public void clickOnTheButton(String buttonName) {
         WebElement button = switch (buttonName) {
             case "Search" -> searchButton;
@@ -46,14 +51,26 @@ public class SpartanCrudOperationPage extends BasePage{
         BrowserUtils.clickOn(button);
     }
 
-    public void clickOnTheButtonForTheSpartanId(String buttonName, String spartanId) {
+    public void clickOnTheButtonForTheFirstSpartanAfterSearch(String buttonName, String spartanName) {
+        String id = getIdOfTheSpartan(spartanName);
         WebElement button = switch (buttonName) {
-            case "View" -> Driver.get().findElement(By.id("view_spartan_" + spartanId));
-            case "Edit" -> Driver.get().findElement(By.id("edit_spartan_" + spartanId));
-            case "Delete" -> Driver.get().findElement(By.id("delete_spartan_" + spartanId));
+            case "View" -> Driver.get().findElement(By.id("view_spartan_" + id));
+            case "Edit" -> Driver.get().findElement(By.id("edit_spartan_" + id));
+            case "Delete" -> Driver.get().findElement(By.id("delete_spartan_" + id));
             default -> null;
         };
         BrowserUtils.clickOn(button);
+    }
+
+    private String getIdOfTheSpartan(String spartanName) {
+        int index = 0;
+        for (WebElement each : nameDataOnTheColumn) {
+            if(each.getText().equals(spartanName)){
+                index = nameDataOnTheColumn.indexOf(each);
+                break;
+            }
+        }
+        return idDataOnTheColumn.get(index).getAttribute("innerText");
     }
 
     public void enterDataToTheInputBox(String data, String inputBoxName) throws InterruptedException {
@@ -65,37 +82,30 @@ public class SpartanCrudOperationPage extends BasePage{
         BrowserUtils.enterData(inputBox, data);
     }
 
-    public String getData(String title){
-        if(title.equals("0")) return "0";
+    public String getData(String title) {
+        if (title.equals("0")) return "0";
         String data = "";
-        wait.until(ExpectedConditions.visibilityOf(totalResult));
-        wait.until(ExpectedConditions.visibilityOf(total));
-        if(title.equals("Total Result")){
+        if (title.equals("Total Result")) {
+            wait.until(ExpectedConditions.visibilityOf(totalResult));
             data = totalResult.getText().substring(2);
-        }else if(title.equals("Total")){
+        } else if (title.equals("Total")) {
+            wait.until(ExpectedConditions.visibilityOf(total));
             data = total.getText().substring(7);
         }
         return data;
     }
 
-    public List<String> getColumnData(String columnName){
+    public List<String> getColumnData(String columnName) {
         List<WebElement> columnDataList = switch (columnName) {
             case "Name" -> nameDataOnTheColumn;
             case "Phone" -> phoneDataOnTheColumn;
+            case "Gender" -> genderDataOnTheColumn;
             default -> null;
         };
         return columnDataList.stream()
                 .map(WebElement::getText)
                 .filter(each -> !each.isEmpty())
                 .toList();
-    }
-
-//    public void clickOnTheButtonaaaaaa(String buttonName) {
-//        Driver.get().findElement(By.xpath("//tbody//tr//td//a[@id=\"view_spartan_"+ spartanID +"\"]")).click();
-//    }
-
-    public void addSpartan(String name, String Gender, Long phone) {
-
     }
 
 }

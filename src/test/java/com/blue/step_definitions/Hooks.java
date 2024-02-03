@@ -5,6 +5,9 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import com.blue.utilities.Driver;
 import com.blue.utilities.LoggerUtil;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +22,11 @@ public class Hooks {
     }
 
     @After()
-    public void tearDownUI() {
+    public void tearDownUI(Scenario scenario) {
+        if (scenario.isFailed()){
+            final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot,"image/png","screenshot");
+        }
         Driver.closeDriver();
         LoggerUtil.logInfo("Browser closed");
     }
