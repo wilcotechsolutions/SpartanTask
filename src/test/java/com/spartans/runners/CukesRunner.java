@@ -1,13 +1,12 @@
 package com.spartans.runners;
 
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin ={
+        plugin = {
                 "html:target/cucumber-reports/cucumber.html",
                 "json:target/cucumber-reports/cucumber.json",
                 "junit:target/cucumber-reports/cucumber.xml",
@@ -16,9 +15,9 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features",
         glue = "com/spartans/step_definitions",
+//        publish = true,
         dryRun = false,
-        tags = "@ui",
-        publish = true
+        tags = "@api"
 )
 
 public class CukesRunner {

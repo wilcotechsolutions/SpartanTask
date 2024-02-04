@@ -4,7 +4,7 @@ import com.spartans.utilities.ConfigurationReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import com.spartans.utilities.Driver;
-import com.spartans.utilities.LoggerUtil;
+import com.spartans.utilities.LoggerUtility;
 import io.cucumber.java.Scenario;
 import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
@@ -19,7 +19,7 @@ public class Hooks {
         Driver.get().manage().window().maximize();
         Driver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         Driver.get().get(ConfigurationReader.get("spartan.homepageUrl"));
-        LoggerUtil.logInfo("Browser set up completed and navigated to the Home Page");
+        LoggerUtility.logInfo("Browser set up completed and navigated to the Home Page");
     }
 
     @After("@ui")
@@ -29,12 +29,12 @@ public class Hooks {
             scenario.attach(screenshot,"image/png","screenshot");
         }
         Driver.closeDriver();
-        LoggerUtil.logInfo("Browser closed");
+        LoggerUtility.logInfo("Browser closed");
     }
 
     @Before("@api")
     public void setUpAPI() {
-        RestAssured.baseURI = ConfigurationReader.get("spartan.apiUrl");
+        RestAssured.baseURI = ConfigurationReader.get("spartan.apiUrl") + "/api/spartans";
     }
 
 }

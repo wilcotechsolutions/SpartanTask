@@ -1,6 +1,6 @@
 package com.spartans.pages;
 
-import com.spartans.utilities.BrowserUtils;
+import com.spartans.utilities.BrowserUtility;
 import com.spartans.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -48,7 +48,7 @@ public class SpartanCrudOperationPage extends BasePage {
             case "Add Spartan" -> addSpartanButton;
             default -> null;
         };
-        BrowserUtils.clickOn(button);
+        BrowserUtility.clickOn(button);
     }
 
     public void clickOnTheButtonForTheFirstSpartanAfterSearch(String buttonName, String spartanName) {
@@ -59,7 +59,7 @@ public class SpartanCrudOperationPage extends BasePage {
             case "Delete" -> Driver.get().findElement(By.id("delete_spartan_" + id));
             default -> null;
         };
-        BrowserUtils.clickOn(button);
+        BrowserUtility.clickOn(button);
     }
 
     private String getIdOfTheSpartan(String spartanName) {
@@ -79,7 +79,7 @@ public class SpartanCrudOperationPage extends BasePage {
             case "Name Search Text Box" -> nameSearchBox;
             default -> null;
         };
-        BrowserUtils.enterData(inputBox, data);
+        BrowserUtility.enterData(inputBox, data);
     }
 
     public String getData(String title) {

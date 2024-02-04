@@ -1,6 +1,6 @@
 package com.spartans.pages;
 
-import com.spartans.utilities.BrowserUtils;
+import com.spartans.utilities.BrowserUtility;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -36,7 +36,7 @@ public class AddSpartanPage extends BasePage {
             case "Back to the List" -> backToTheListButton;
             default -> null;
         };
-        BrowserUtils.clickOn(button);
+        BrowserUtility.clickOn(button);
     }
 
     public void enterDataToTheInputBox(String data, String inputBoxName) throws InterruptedException {
@@ -45,7 +45,7 @@ public class AddSpartanPage extends BasePage {
             case "Phone Input Box" -> phoneInputBox;
             default -> null;
         };
-        BrowserUtils.enterData(inputBox, data);
+        BrowserUtility.enterData(inputBox, data);
     }
 
     public void selectFromDropdown(String option, String dropdownName) {

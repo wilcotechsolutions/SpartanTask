@@ -1,116 +1,79 @@
 package com.spartans.step_definitions;
 
+import static com.spartans.utilities.ApiUtility.*;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static io.restassured.RestAssured.given;
+import java.util.*;
 
 public class SpartanAPIStepDef {
 
     Response response;
 
-    @When("Send a {string} request to the {string}")
-    public void sendARequestToThe(String requestType, String endpoint) {
-        response = given()
-                .accept(ContentType.JSON)
-                .when().get(endpoint);
+    @When("Send a request to display all Spartans")
+    public void sendAGETRequestToTheToDisplayAllSpartans() {
+        response = sendGetRequestToEndpoint("");
     }
 
-    @When("Send a {string} request to the {string} with data {string}")
-    public void sendARequestToTheWithData(String requestType, String endpoint, String data) {
-        endpoint = endpoint.contains("search") ? endpoint + data : endpoint + "/" + data;
-        if (requestType.equals("GET")) {
-            response = given()
-                    .accept(ContentType.JSON)
-                    .and().contentType(ContentType.JSON)
-                    .when().get(endpoint);
-        }
-        if (requestType.equals("DELETE")) {
-            response = given()
-                    .accept(ContentType.JSON)
-                    .and().contentType(ContentType.JSON)
-                    .and().auth().basic("admin", "admin")
-                    .when().delete(endpoint);
-        }
+    @When("Send a request to add a new Spartan {string} {string} {string}")
+    public void sendARequestToAddANewSpartan(String name, String gender, String phone) {
+        Map<String, Object> payLoad = createPayload(name, gender, phone);
+        response = sendPostRequestWithPayload(payLoad);
     }
 
-    @When("Send a {string} request to the {string} with data {string} {string}")
-    public void sendARequestToTheWithData(String requestType, String endpoint, String id, String name) {
-        Map<String, Object> payloadData = new HashMap<>();
-        payloadData.put("name", name);
-        response = given()
-                .accept(ContentType.JSON)
-                .and().contentType(ContentType.JSON)
-                .and().auth().basic("admin", "admin")
-                .and().body(payloadData)
-                .when().patch(endpoint + "/" + id);
+    @When("Send a request to display last created Spartan")
+    public void sendARequestToDisplayLastCreatedSpartan() {
+        int maxId = getLastCreatedSpartanId();
+        response = sendGetRequestToEndpoint("/" + maxId);
     }
 
-    @When("Send a {string} request to the {string} with data {string} {string} {string}")
-    public void sendARequestToTheWithData(String requestType, String endpoint, String name, String gender, String phone) {
-        Map<String, Object> payloadData = createPayloadData(name, gender, phone);
-        response = given()
-                .accept(ContentType.JSON)
-                .and().contentType(ContentType.JSON)
-                .and().auth().basic("admin", "admin")
-                .and().body(payloadData)
-                .when().post(endpoint);
+    @When("Send a request to update the last created Spartan {string} {string} {string}")
+    public void sendARequestToUpdateTheLastCreatedSpartan(String name, String gender, String phone) {
+        Map<String, Object> payLoad = createPayload(name, gender, phone);
+        int maxId = getLastCreatedSpartanId();
+        response = sendPutRequestToEndpointWithPayload("/" + maxId, payLoad);
     }
 
-    @When("Send a {string} request to the {string} with data {string} {string} {string} {string}")
-    public void sendARequestToTheWithData(String requestType, String endpoint, String id, String name, String gender, String phone) {
-        Map<String, Object> payloadData = createPayloadData(name, gender, phone);
-        response = given()
-                .accept(ContentType.JSON)
-                .and().contentType(ContentType.JSON)
-                .and().auth().basic("admin", "admin")
-                .and().body(payloadData)
-                .when().put(endpoint + "/" + id);
+    @When("Send a request to partially update the last created Spartan {string}")
+    public void sendARequestToPartiallyUpdateTheLastCreatedSpartan(String name) {
+        Map<String, Object> payLoad = createPayload(name);
+        int maxId = getLastCreatedSpartanId();
+        response = sendPatchRequestToEndpointWithPayload("/" + maxId, payLoad);
     }
 
-    private Map<String, Object> createPayloadData(String name, String gender, String phone) {
-        Map<String, Object> payloadData = new HashMap<>();
-        payloadData.put("name", name);
-        payloadData.put("gender", gender);
-        payloadData.put("phone", phone);
-        return payloadData;
+    @When("Send a request to search for the last created Spartan {string}")
+    public void sendARequestToSearchForTheLastCreatedSpartan(String data) {
+        response = sendGetRequestToEndpoint("/search?nameContains=" + data);
     }
 
-    @Then("Verify that respond {string} is {string}")
-    public void verifyThatRespondIs(String dataType, String expectedData) {
-        String actualData = switch (dataType) {
-            case "status code" -> String.valueOf(response.statusCode());
-            case "content type" -> response.contentType();
-            case "name" -> response.path("data.name") == null ? response.path("name") : response.path("data.name");
-            case "gender" ->
-                    response.path("data.gender") == null ? response.path("gender") : response.path("data.gender");
-            case "phone" ->
-                    response.path("data.phone") == null ? response.path("phone").toString() : response.path("data.phone").toString();
-            default -> null;
-        };
+    @When("Send a request to delete the last created Spartan")
+    public void sendARequestToDeleteTheLastCreatedSpartan() {
+        int maxId = getLastCreatedSpartanId();
+        response = sendDeleteRequestToEndpoint("/" + maxId);
+    }
+
+    @Then("Verify that response {string} is {string}")
+    public void verifyThatResponseIs(String dataType, String expectedData) {
+        String actualData = getActualData(dataType);
         System.out.println("expectedData = " + expectedData);
         System.out.println("actualData = " + actualData);
         Assert.assertEquals(expectedData, actualData);
     }
 
-    @Then("Verify that respond {string} contains {string}")
-    public void verifyThatRespondContains(String names, String data) {
-        String key = data.toLowerCase();
-        JsonPath jsonPath = response.jsonPath();
-        List<String> actualNames = jsonPath.getList("content.name");
-        System.out.println("actualNames = " + actualNames);
-        System.out.println("search key = " + data);
-        for (String each : actualNames) {
-            Assert.assertTrue(each.toLowerCase().contains(key));
+    @Then("Verify that response {string} list contains {string}")
+    public void verifyThatResponseContains(String dataType, String expectedData) {
+        List<String> actualDataList = getActualDataList(dataType);
+        for (String each : actualDataList) {
+            Assert.assertTrue(each.toLowerCase().contains(expectedData.toLowerCase()));
         }
+    }
+
+    @Then("Verify that response body is not empty")
+    public void verifyThatResponseBodyIsNotEmpty() {
+        Assert.assertNotNull(response.body());
     }
 
 }
