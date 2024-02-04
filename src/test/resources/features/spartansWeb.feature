@@ -27,7 +27,7 @@ Feature: UI Tests
     Then Verify that "Total Result" is equal to "Total"
     Examples:
       | NAME  |
-      | Tariqsss |
+      | Tariq |
 
   @View
   Scenario Outline: Verify View Functionality
