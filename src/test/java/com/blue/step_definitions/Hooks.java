@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    @Before()
+    @Before("web")
     public void setUpUI() {
         Driver.get().manage().window().maximize();
         Driver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -21,7 +21,7 @@ public class Hooks {
         LoggerUtil.logInfo("Browser set up completed and navigated to the Home Page");
     }
 
-    @After()
+    @After("web")
     public void tearDownUI(Scenario scenario) {
         if (scenario.isFailed()){
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
