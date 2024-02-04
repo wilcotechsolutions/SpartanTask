@@ -1,6 +1,6 @@
-package com.blue.step_definitions;
+package com.spartans.step_definitions;
 
-import com.blue.pages.*;
+import com.spartans.pages.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

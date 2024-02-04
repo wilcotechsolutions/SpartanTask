@@ -1,4 +1,4 @@
-package com.blue.step_definitions;
+package com.spartans.step_definitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

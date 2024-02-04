@@ -1,4 +1,4 @@
-package com.blue.runners;
+package com.spartans.runners;
 
 
 import io.cucumber.junit.Cucumber;
@@ -15,9 +15,9 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt"
         },
         features = "src/test/resources/features",
-        glue = "com/blue/step_definitions",
+        glue = "com/spartans/step_definitions",
         dryRun = false,
-        tags = "@web"
+        tags = ""
 )
 
 public class CukesRunner {

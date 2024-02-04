@@ -1,10 +1,10 @@
-package com.blue.step_definitions;
+package com.spartans.step_definitions;
 
-import com.blue.utilities.ConfigurationReader;
+import com.spartans.utilities.ConfigurationReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import com.blue.utilities.Driver;
-import com.blue.utilities.LoggerUtil;
+import com.spartans.utilities.Driver;
+import com.spartans.utilities.LoggerUtil;
 import io.cucumber.java.Scenario;
 import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
