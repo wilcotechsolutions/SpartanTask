@@ -48,7 +48,7 @@ Feature: API Tests
     Then Verify that respond "status code" is "<Status Code>"
     Examples:
       | Request Type | Endpoint      | Id  | Status Code |
-      | DELETE       | /api/spartans | 149 | 204         |
+      | DELETE       | /api/spartans | 141 | 204         |
 
   @PartialUpdateASpartan
   Scenario Outline: "PATCH" "/api/spartans" "Partial Update a Spartan"
