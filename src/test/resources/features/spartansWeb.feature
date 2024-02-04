@@ -1,5 +1,5 @@
-@web
-Feature: Manage Spartans Army
+@ui
+Feature: UI Tests
 
   Agile Story: As the commander of the army, I should manage my soldiers, so that I can win.
 
@@ -27,7 +27,7 @@ Feature: Manage Spartans Army
     Then Verify that "Total Result" is equal to "Total"
     Examples:
       | NAME  |
-      | Tariqssss |
+      | Tariq |
 
   @View
   Scenario Outline: Verify View Functionality

@@ -1,10 +1,7 @@
 package com.blue.step_definitions;
 
-import com.blue.utilities.ConfigurationReader;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -14,16 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 
 public class SpartanAPIStepDef {
 
     Response response;
-
-    @Before()
-    public void setUpAPI() {
-        RestAssured.baseURI = ConfigurationReader.get("spartan.apiUrl");
-    }
 
     @When("Send a {string} request to the {string}")
     public void sendARequestToThe(String requestType, String endpoint) {

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    @Before("web")
+    @Before("@ui")
     public void setUpUI() {
         Driver.get().manage().window().maximize();
         Driver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -22,7 +22,7 @@ public class Hooks {
         LoggerUtil.logInfo("Browser set up completed and navigated to the Home Page");
     }
 
-    @After("web")
+    @After("@ui")
     public void tearDownUI(Scenario scenario) {
         if (scenario.isFailed()){
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
@@ -30,6 +30,11 @@ public class Hooks {
         }
         Driver.closeDriver();
         LoggerUtil.logInfo("Browser closed");
+    }
+
+    @Before("@api")
+    public void setUpAPI() {
+        RestAssured.baseURI = ConfigurationReader.get("spartan.apiUrl");
     }
 
 }
