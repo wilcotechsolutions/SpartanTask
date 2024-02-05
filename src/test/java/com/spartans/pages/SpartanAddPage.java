@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddSpartanPage extends BasePage {
+public class SpartanAddPage extends BasePage {
 
     @FindBy(id="name")
     public WebElement nameInputBox;

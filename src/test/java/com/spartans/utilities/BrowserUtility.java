@@ -1,10 +1,14 @@
 package com.spartans.utilities;
 
+import com.spartans.pages.*;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class BrowserUtility {
 

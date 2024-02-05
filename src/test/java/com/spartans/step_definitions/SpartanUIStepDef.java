@@ -1,19 +1,14 @@
 package com.spartans.step_definitions;
 
-import com.spartans.pages.*;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class SpartanCRUDStepDef {
 
-    SpartanHomePage spartanHomePage = new SpartanHomePage();
-    SpartanCrudOperationPage spartanCrudOperationPage = new SpartanCrudOperationPage();
-    SpartanDetailsPage spartanDetailsPage = new SpartanDetailsPage();
-    SpartanEditPage spartanEditPage = new SpartanEditPage();
-    AddSpartanPage addSpartanPage = new AddSpartanPage();
+public class SpartanUIStepDef extends BaseStepDef{
 
     int preDeletionTotal;
 
@@ -92,22 +87,6 @@ public class SpartanCRUDStepDef {
         System.out.println("actualResult = " + actualResult);
         System.out.println("expectedResult = " + expectedResult);
         Assert.assertEquals(actualResult, expectedResult);
-    }
-
-    private void clickOnTheButton(String buttonName, String pageName){
-        switch (pageName) {
-            case "Spartan Crud Operation" -> spartanCrudOperationPage.clickOnTheButton(buttonName);
-            case "Spartan Edit" -> spartanEditPage.clickOnTheButton(buttonName);
-            case "Add Spartan" -> addSpartanPage.clickOnTheButton(buttonName);
-        }
-    }
-
-    private void enterDataToTheInputBox(String data, String inputBoxName, String pageName) throws InterruptedException {
-        switch (pageName) {
-            case "Spartan Crud Operation" -> spartanCrudOperationPage.enterDataToTheInputBox(data, inputBoxName);
-            case "Spartan Edit" -> spartanEditPage.enterDataToTheInputBox(data, inputBoxName);
-            case "Add Spartan" -> addSpartanPage.enterDataToTheInputBox(data, inputBoxName);
-        }
     }
 
 }

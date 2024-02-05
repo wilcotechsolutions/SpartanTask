@@ -11,7 +11,7 @@ import java.util.*;
 
 public class SpartanAPIStepDef {
 
-    Response response;
+    private Response response;
 
     @When("Send a request to display all Spartans")
     public void sendAGETRequestToTheToDisplayAllSpartans() {
