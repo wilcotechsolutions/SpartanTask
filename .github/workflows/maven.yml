@@ -24,4 +24,6 @@ jobs:
     - name: Build with Maven
       # run: mvn verify
       # run: mvn verify -D"cucumber.options"="--tags @ui"
-      run: mvn verify -D"cucumber.options"="--tags @api"
+      run: mvn verify -Dcucumber.options="$CUCUMBER_OPTIONS"
+      env:
+        CUCUMBER_OPTIONS: "--tags @api"
