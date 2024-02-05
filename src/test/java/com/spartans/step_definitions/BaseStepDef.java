@@ -8,13 +8,14 @@ public class BaseStepDef {
     protected SpartanCrudOperationPage spartanCrudOperationPage = new SpartanCrudOperationPage();
     protected SpartanDetailsPage spartanDetailsPage = new SpartanDetailsPage();
     protected SpartanEditPage spartanEditPage = new SpartanEditPage();
-    protected SpartanAddPage addSpartanPage = new SpartanAddPage();
+    protected SpartanAddPage spartanAddPage = new SpartanAddPage();
 
     protected void clickOnTheButton(String buttonName, String pageName){
         switch (pageName) {
+            case "Spartan Home" -> spartanHomePage.clickOnTheButton(buttonName);
             case "Spartan Crud Operation" -> spartanCrudOperationPage.clickOnTheButton(buttonName);
             case "Spartan Edit" -> spartanEditPage.clickOnTheButton(buttonName);
-            case "Add Spartan" -> addSpartanPage.clickOnTheButton(buttonName);
+            case "Spartan Add" -> spartanAddPage.clickOnTheButton(buttonName);
         }
     }
 
@@ -22,7 +23,7 @@ public class BaseStepDef {
         switch (pageName) {
             case "Spartan Crud Operation" -> spartanCrudOperationPage.enterDataToTheInputBox(data, inputBoxName);
             case "Spartan Edit" -> spartanEditPage.enterDataToTheInputBox(data, inputBoxName);
-            case "Add Spartan" -> addSpartanPage.enterDataToTheInputBox(data, inputBoxName);
+            case "Spartan Add" -> spartanAddPage.enterDataToTheInputBox(data, inputBoxName);
         }
     }
 
