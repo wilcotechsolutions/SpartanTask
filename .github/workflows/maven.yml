@@ -22,6 +22,6 @@ jobs:
     - name: Maven Verify Phase
       # run: mvn verify
       # run: mvn verify -D"cucumber.options"="--tags @ui"
-      run: bash -c "mvn verify --tags=@api"
+      run: bash -c 'mvn verify --tags="@api"'
 
   
