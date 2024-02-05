@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v4
-    - name: API Test Suit
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
@@ -22,6 +22,6 @@ jobs:
     - name: Build with Maven
       # run: mvn verify
       # run: mvn verify -D"cucumber.options"="--tags @ui"
-      run: mvn verify -D"cucumber.options=$CUCUMBER_OPTIONS"
+      run: bash -c "mvn verify $CUCUMBER_OPTIONS
       env:
         CUCUMBER_OPTIONS: "--tags @api"
