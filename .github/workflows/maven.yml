@@ -1,4 +1,4 @@
-name: Spartan API Tests
+name: Spartan Tests
 on: [workflow_dispatch]
 jobs:
   build:
