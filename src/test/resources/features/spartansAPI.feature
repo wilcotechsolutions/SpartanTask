@@ -1,4 +1,4 @@
-@api
+@spartansAPI
 Feature: API Tests
 
   @DisplayAllSpartans

@@ -5,14 +5,12 @@ import org.openqa.selenium.WebElement;
 
 public class BaseStepDef {
 
-    protected String expectedUploadedFileName;
     protected SpartanHomePage spartanHomePage = new SpartanHomePage();
     protected SpartanCrudOperationPage spartanCrudOperationPage = new SpartanCrudOperationPage();
     protected SpartanDetailsPage spartanDetailsPage = new SpartanDetailsPage();
     protected SpartanEditPage spartanEditPage = new SpartanEditPage();
     protected SpartanAddPage spartanAddPage = new SpartanAddPage();
-    protected SpartanAddPage addSpartanPage = new SpartanAddPage();
-    protected HerokuappPage herokuappPage = new HerokuappPage();
+    protected HerokuAppPage herokuAppPage = new HerokuAppPage();
 
     protected void clickOnTheButton(String buttonName, String pageName) {
         switch (pageName) {
@@ -31,29 +29,24 @@ public class BaseStepDef {
         }
     }
 
-    protected void clickHerokuappButton(String buttonName) {
+    protected void clickHerokuAppButton(String buttonName) {
         switch (buttonName) {
-            case "File Upload" -> herokuappPage.fileUpload.click();
-            case "Broken Images" -> herokuappPage.brokenImages.click();
+            case "File Upload" -> herokuAppPage.fileUpload.click();
+            case "Broken Images" -> herokuAppPage.brokenImages.click();
+            case "Hovers" -> herokuAppPage.hovers.click();
+
         }
     }
 
     protected void uploadFile(String filePath) {
         String nameDirectory = System.getProperty("user.dir");
         String finalPath = nameDirectory + "/" + filePath;
-        herokuappPage.chooseFile.sendKeys(finalPath);
-        herokuappPage.uploadFile.click();
-
-        String[] arr = filePath.split("/");
-        expectedUploadedFileName = arr[arr.length - 1];
+        herokuAppPage.chooseFile.sendKeys(finalPath);
+        herokuAppPage.uploadFile.click();
     }
 
     public boolean isImageBroken(WebElement image) {
-        if (image.getAttribute("naturalWidth").equals("0")) {
-            System.out.println(image.getAttribute("outerHTML") + " is broken.");
-            return true;
-        }
-        return false;
+        return image.getAttribute("naturalWidth").equals("0");
     }
 
 }

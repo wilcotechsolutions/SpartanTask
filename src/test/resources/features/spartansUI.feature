@@ -1,4 +1,4 @@
-@ui
+@spartansUI
 Feature: UI Tests
 
   Agile Story: As the commander of the army, I should manage my soldiers, so that I can win.

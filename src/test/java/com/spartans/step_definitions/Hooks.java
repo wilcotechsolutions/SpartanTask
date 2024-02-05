@@ -13,24 +13,24 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    @Before("@ui")
-    public void setUpUI() {
+    @Before("@spartansUI")
+    public void setUpSpartanUI() {
         Driver.get().manage().window().maximize();
         Driver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         Driver.get().get(ConfigurationReader.get("spartan.homepageUrl"));
-        LoggerUtility.logInfo("Browser set up completed and navigated to the Home Page");
+        LoggerUtility.logInfo("Browser set up completed and navigated to the Spartan Home Page");
     }
 
-    @Before("@hero")
+    @Before("@herokuUI")
     public void setUpHeroUI() {
         Driver.get().manage().window().maximize();
         Driver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         Driver.get().get(ConfigurationReader.get("herokuapp"));
-        LoggerUtility.logInfo("Browser set up completed and navigated to the Home Page");
+        LoggerUtility.logInfo("Browser set up completed and navigated to the HerookuApp Page");
     }
 
-    @After("@ui")
-    public void tearDownUI(Scenario scenario) {
+    @After("@spartansUI")
+    public void tearDownSpartan(Scenario scenario) {
         if (scenario.isFailed()){
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png","screenshot");
@@ -39,8 +39,8 @@ public class Hooks {
         LoggerUtility.logInfo("Browser closed");
     }
 
-    @After("@hero")
-    public void tearDownHero(Scenario scenario) {
+    @After("@herokuUI")
+    public void tearDownHeroku(Scenario scenario) {
         if (scenario.isFailed()){
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png","screenshot");
@@ -49,7 +49,7 @@ public class Hooks {
         LoggerUtility.logInfo("Browser closed");
     }
 
-    @Before("@api")
+    @Before("@spartansAPI")
     public void setUpAPI() {
         RestAssured.baseURI = ConfigurationReader.get("spartan.apiUrl") + "/api/spartans";
     }
