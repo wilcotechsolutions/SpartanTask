@@ -7,15 +7,13 @@
 # documentation.
 
 name: Spartan API Tests
-
 on: [workflow_dispatch]
-
 jobs:
   build:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 21
+    - name: API Test Suit
       uses: actions/setup-java@v4
       with:
         java-version: '21'
@@ -24,6 +22,6 @@ jobs:
     - name: Build with Maven
       # run: mvn verify
       # run: mvn verify -D"cucumber.options"="--tags @ui"
-      run: mvn verify -Dcucumber.options="$CUCUMBER_OPTIONS"
+      run: mvn verify -D"cucumber.options=$CUCUMBER_OPTIONS"
       env:
         CUCUMBER_OPTIONS: "--tags @api"
