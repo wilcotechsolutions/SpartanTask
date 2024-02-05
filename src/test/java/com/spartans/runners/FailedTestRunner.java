@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
         plugin ={
                 "html:target/cucumber-reports/failed-cucumber.html",
                 "json:target/cucumber-reports/failed-cucumber.json",
-                "junit:target/cucumber-reports/failed-cucumber.xml",
-                "pretty",
+               // "junit:target/cucumber-reports/failed-cucumber.xml",
+                //"pretty",
         },
         features = "@target/rerun.txt",
         glue = "com/spartans/step_definitions"
