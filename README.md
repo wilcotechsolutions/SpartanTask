@@ -33,6 +33,8 @@ The Spartan Testing Framework seamlessly integrates with GitHub Actions, automat
 3. Click on the "Run workflow" button.
 4. Monitor the progress and review detailed reports in the Actions tab.
 
+   ![image](https://github.com/wilcotechsolutions/SpartanTask/assets/154798405/65f92be3-c728-4303-95ab-6e50f25dc90c)
+
 **Notes**
 
 We value your contributions and appreciate the collaborative spirit. If you have suggestions, identified issues, or would like to contribute to the Testing Framework, please reach out to info@wilcotechsolutions.com.
