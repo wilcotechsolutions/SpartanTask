@@ -13,15 +13,14 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 21
+    - name: Project Set up Phase
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Maven Verify Phase
       # run: mvn verify
       # run: mvn verify -D"cucumber.options"="--tags @ui"
-      run: bash -c "mvn verify $CUCUMBER_OPTIONS"
-      env:
-        CUCUMBER_OPTIONS: "--tags @api"
+      run: bash -c "mvn verify --tags @api"
+  
