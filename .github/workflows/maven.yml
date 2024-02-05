@@ -1,0 +1,19 @@
+name: Spartan API Tests
+on:
+  push:
+    branches: [ "master_API_Tests" ]
+  pull_request:
+    branches: [ "master_API_Tests" ]
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v4
+    - name: Project Set up Phase
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: Maven Verify Phase
+      run: mvn verify
