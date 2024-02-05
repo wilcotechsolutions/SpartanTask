@@ -2,7 +2,6 @@ package com.spartans.step_definitions;
 
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -11,11 +10,6 @@ import org.junit.Assert;
 public class SpartanUIStepDef extends BaseStepDef{
 
     int preDeletionTotal;
-
-    @Given("Commander navigates to the Spartan Crud Operation Page")
-    public void commander_navigates_to_the_spartan_crud_operation_page() {
-        spartanHomePage.clickOnTheButton("Web Data");
-    }
 
     @When("Commander enters {string} to the {string} on the {string} page")
     public void commander_enters_to_the_on_the_spartan_crud_operation_page(String name, String inputBoxName, String pageName) throws InterruptedException {
@@ -71,7 +65,7 @@ public class SpartanUIStepDef extends BaseStepDef{
     @And("Commander select {string} from the {string} dropdown on the {string} page")
     public void commenderSelectFromTheOnThePage(String option, String dropdownName, String pageName) {
         if(pageName.equals("Add Spartan")){
-            addSpartanPage.selectFromDropdown(option, dropdownName);
+            spartanAddPage.selectFromDropdown(option, dropdownName);
         }
     }
 
@@ -81,8 +75,8 @@ public class SpartanUIStepDef extends BaseStepDef{
         String actualResult = "";
         if(pageName.equals("Spartan Edit")){
             actualResult = spartanEditPage.getActualData(fieldName);
-        }else if(pageName.equals("Add Spartan")){
-            actualResult = addSpartanPage.getActualData(fieldName);
+        }else if(pageName.equals("Spartan Add")){
+            actualResult = spartanAddPage.getActualData(fieldName);
         }
         System.out.println("actualResult = " + actualResult);
         System.out.println("expectedResult = " + expectedResult);
