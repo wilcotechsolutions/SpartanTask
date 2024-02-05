@@ -29,8 +29,18 @@ public class Hooks {
         LoggerUtility.logInfo("Browser set up completed and navigated to the Home Page");
     }
 
-    @After()
+    @After("@ui")
     public void tearDownUI(Scenario scenario) {
+        if (scenario.isFailed()){
+            final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot,"image/png","screenshot");
+        }
+        Driver.closeDriver();
+        LoggerUtility.logInfo("Browser closed");
+    }
+
+    @After("@hero")
+    public void tearDownHero(Scenario scenario) {
         if (scenario.isFailed()){
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png","screenshot");

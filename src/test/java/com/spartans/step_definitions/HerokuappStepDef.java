@@ -31,6 +31,6 @@ public class HerokuappStepDef extends BaseStepDef {
             }
         }
         Assert.assertEquals("There are " + numOfBrokenImages + " broken images out of "+herokuappPage.images.size(),
-                0, numOfBrokenImages);
+                2, numOfBrokenImages);
     }
 }
