@@ -20,6 +20,15 @@ Feature: API Tests
       | Status Code | Content Type     | Name | Gender | Phone      |
       | 201         | application/json | Jane | Female | 9874563210 |
 
+  @AddANewSpartanWithInvalidPhoneNumber
+  Scenario Outline: "POST" "/api/spartans" "Add a New Spartan with invalid phone number"
+    When Send a request to add a new Spartan "<Name>" "<Gender>" "<Phone>"
+    Then Verify that response "status code" is "<Status Code>"
+    Then Verify that response "message" is "<Message>"
+    Examples:
+      | Status Code | Message        | Name | Gender | Phone |
+      | 400         | Invalid Input! | Jane | Female | 1     |
+
   @DisplayOneSpartansInfo
   Scenario Outline: "GET" "/api/spartans/{id}" "Display One Spartans Info"
     When Send a request to display last created Spartan

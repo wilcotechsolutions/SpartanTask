@@ -95,6 +95,7 @@ public class ApiUtility {
                     response.path("data.gender") == null ? response.path("gender") : response.path("data.gender");
             case "phone" ->
                     response.path("data.phone") == null ? response.path("phone").toString() : response.path("data.phone").toString();
+            case "message" -> response.path("message");
             default -> null;
         };
     }
